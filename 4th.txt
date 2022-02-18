@@ -1,0 +1,63 @@
+1.
+var obj1 = { name: "Person 1", age:5 };
+var obj2 = { age:5, name: "Person 1" };
+
+const ordered1={};
+const ordered2={};
+
+Object.keys(obj1).sort().forEach(key => {
+    ordered1[key]= obj1[key];
+});
+
+Object.keys(obj2).sort().forEach(key => {
+    ordered2[key]= obj2[key];
+});
+// console.log(ordered1,ordered2)
+console.log(JSON.stringify(ordered1) === JSON.stringify(ordered2));
+2.
+var request = new XMLHttpRequest();
+
+request.open("GET","https://raw.githubusercontent.com/rvsp/restcountries-json-data/master/res-countries.json");
+  
+request.send();
+
+request.onload =function(){
+    if(request.status>=200 && request.status<300){
+    var data = JSON.parse(request.response);
+   for(var i=0;i<data.length;i++){
+        console.log(`Country:${data[i].name}
+Flag:${data[i].flag}`);
+    }
+}
+else{
+    console.log("Data is not available");
+}
+};
+
+
+3.
+var request = new XMLHttpRequest();
+
+request.open(
+  "GET",
+  "https://raw.githubusercontent.com/rvsp/restcountries-json-data/master/res-countries.json"
+);
+
+request.send();
+
+request.onload = function () {
+  if (request.status >= 200 && request.status < 300) {
+    var data = JSON.parse(request.response);
+    console.log("Country data:");
+    var country_data = JSON.parse(request.response);
+    for (let i = 0; i < country_data.length; i++) {
+      console.log(`Country:${country_data[i].name}
+region:${country_data[i].region}
+subregion:${country_data[i].subregion}
+population:${country_data[i].population}`);
+    }
+  } else {
+    console.log("Error,Data missing");
+  }
+};
+
